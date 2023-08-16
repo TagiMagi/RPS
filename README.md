@@ -1,2 +1,1 @@
-# RPS
-rock, paper, scissors 
+# Tic_Tac_Toe
