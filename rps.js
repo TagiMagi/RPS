@@ -1,32 +1,46 @@
 
 
+let rounds = 0; 
+let computerScore = 0;
+let playerScore = 0; 
+
 function getComputerChoice() {
     choices = ['rock', 'paper', 'scissors']
     return choices[Math.floor(3 * Math.random())];
     }
 
+
 function playRound() {
     
     const computerSelection = getComputerChoice();
     const playerSelection = this.textContent;
-    if (playerSelection == computerSelection) {
-        resultBox.textContent = 'Tie! Play again';
-        alert('Computer chose ' + String(computerSelection) + '. Tie!') ;
-       
-    }
-    else if ((playerSelection == 'rock' && computerSelection == 'paper') ||
-        (playerSelection == 'paper' && computerSelection == 'scissors') ||
-        (playerSelection == 'scissors' && computerSelection == 'rock')) {
-        resultBox.textContent = `Computer chose ${computerSelection}, so... you LOSE!`;
-        alert('Computer chose ' + String(computerSelection) + '. You LOSE!');
+
+    if (rounds < 5) {
+
+        if (playerSelection == computerSelection) {
+            resultBox.textContent = 'Tie!';
         }
-    else {
-        resultBox.textContent = `Computer chose ${computerSelection}, so... you WIN!`;
-        alert('Computer chose ' + String(computerSelection) + '. You WIN!');
+        else if ((playerSelection == 'rock' && computerSelection == 'paper') ||
+            (playerSelection == 'paper' && computerSelection == 'scissors') ||
+            (playerSelection == 'scissors' && computerSelection == 'rock')) {
+            computerScore++;
+            computerScoreBox.textContent = `Computer Score: ${computerScore}`
+            resultBox.textContent = `Computer chose ${computerSelection}, so... you LOSE!`;
+        }
+        else {
+            playerScore++;
+            playerScoreBox.textContent = `Player Score: ${playerScore}`
+            resultBox.textContent = `Computer chose ${computerSelection}, so... you WIN!`;
+        }
+        rounds++;
+    } else {
+        resultBox.textContent = `Game Over! Final score: you = ${playerScore} Computer = ${computerScore}. Refresh to play again!`
+        playerScore = 0;
+        computerScore = 0;
         
     }
-}
 
+}
 // oneRound(playerChoice, computerChoice)
 
 /* function game() {
@@ -60,6 +74,8 @@ const resultBox = document.querySelector('#results');
 rockButton.addEventListener('click' , playRound)*/
 const buttons = document.querySelectorAll('button');
 buttons.forEach(button => button.addEventListener('click' , playRound));
-const resultBox = document.querySelector('#results');
+const resultBox = document.querySelector('.results');
+const playerScoreBox = document.querySelector('.playerScore');
+const computerScoreBox = document.querySelector('.computerScore');
 
 // game()
