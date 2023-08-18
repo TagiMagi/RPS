@@ -5,26 +5,31 @@ function getComputerChoice() {
     return choices[Math.floor(3 * Math.random())];
     }
 
-function playRound(playerSelection, computerSelection) {
+function playRound() {
+    
+    const computerSelection = getComputerChoice();
+    const playerSelection = this.textContent;
     if (playerSelection == computerSelection) {
+        resultBox.textContent = 'Tie! Play again';
         alert('Computer chose ' + String(computerSelection) + '. Tie!') ;
-        return('Tie! Play again');
+       
     }
     else if ((playerSelection == 'rock' && computerSelection == 'paper') ||
         (playerSelection == 'paper' && computerSelection == 'scissors') ||
         (playerSelection == 'scissors' && computerSelection == 'rock')) {
+        resultBox.textContent = `Computer chose ${computerSelection}, so... you LOSE!`;
         alert('Computer chose ' + String(computerSelection) + '. You LOSE!');
-        return('Computer chose ' + computerSelection + ' ,so... you LOSE!');
         }
     else {
+        resultBox.textContent = `Computer chose ${computerSelection}, so... you WIN!`;
         alert('Computer chose ' + String(computerSelection) + '. You WIN!');
-        return('Computer chose ' + computerSelection + ' ,so... you WIN!');
+        
     }
 }
 
 // oneRound(playerChoice, computerChoice)
 
-function game() {
+/* function game() {
     let you = 0;
     let computer = 0;
     let tie = 0;
@@ -46,5 +51,15 @@ function game() {
 console.log('Game Over. Final Score: You = ' + String(you) + ' Computer = ' + String(computer)
 + ' Tie = ' + String(tie))
 }
+*/
 
-game()
+/* const rockButton = document.querySelector('.rock');
+const paperButton = document.querySelector('.paper');
+const scissorsButton = document.querySelector('.scissors');
+const resultBox = document.querySelector('#results');
+rockButton.addEventListener('click' , playRound)*/
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click' , playRound));
+const resultBox = document.querySelector('#results');
+
+// game()
